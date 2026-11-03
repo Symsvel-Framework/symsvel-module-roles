@@ -1,6 +1,6 @@
 {
-    "name": "symsvel-framework/module-symsvel-module-roles",
-    "description": "SymSvel module SymsvelModuleRoles",
+    "name": "symsvel-framework/module-roles",
+    "description": "SymSvel native roles module",
     "type": "symfony-bundle",
     "license": "proprietary",
     "require": {
@@ -9,12 +9,12 @@
     },
     "autoload": {
         "psr-4": {
-            "SymSvel\\Module\\SymsvelModuleRoles\\": "back/src/"
+            "SymSvel\\Module\\Roles\\": "back/src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "SymSvel\\Module\\SymsvelModuleRoles\\Tests\\": "back/tests/"
+            "SymSvel\\Module\\Roles\\Tests\\": "back/tests/"
         }
     },
     "require-dev": {
