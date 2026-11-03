@@ -1,8 +1,10 @@
 {
     "schema": 1,
-    "name": "SymsvelModuleRoles",
+    "name": "Roles",
     "dependencies": {},
-    "tables": [],
+    "tables": [
+        "symsvel_roles"
+    ],
     "components": {
         "back": "back",
         "bo": "bo"
