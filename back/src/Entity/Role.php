@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace SymSvel\Module\Roles\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use SymSvel\Module\Roles\Repository\RoleRepository;
 
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: RoleRepository::class)]
 #[ORM\Table(name: 'symsvel_roles')]
 #[ORM\UniqueConstraint(name: 'uniq_symsvel_roles_code', columns: ['code'])]
 class Role
