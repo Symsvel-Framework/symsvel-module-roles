@@ -13,8 +13,8 @@ final class RolePolicy
 
     public function assertMutable(string $code): void
     {
-        if ($code === RoleCodes::DEV) {
-            throw new \DomainException('ROLE_DEV is a protected system role.');
+        if (in_array($code, [RoleCodes::DEV, RoleCodes::SUPER_ADMIN, RoleCodes::ADMIN, RoleCodes::USER], true)) {
+            throw new \DomainException('Native role codes are protected.');
         }
     }
 }
