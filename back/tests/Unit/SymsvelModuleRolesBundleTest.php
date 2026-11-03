@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace SymSvel\Module\SymsvelModuleRoles\Tests\Unit;
+namespace SymSvel\Module\Roles\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use SymSvel\Module\SymsvelModuleRoles\SymsvelModuleRolesBundle;
+use SymSvel\Module\Roles\RolesBundle;
 
 final class SymsvelModuleRolesBundleTest extends TestCase
 {
     public function testBundleCanBeInstantiated(): void
     {
-        self::assertInstanceOf(SymsvelModuleRolesBundle::class, new SymsvelModuleRolesBundle());
+        self::assertInstanceOf(RolesBundle::class, new RolesBundle());
     }
 }
