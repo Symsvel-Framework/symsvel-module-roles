@@ -17,6 +17,11 @@ final class RoleManager
 
     public function create(string $code, string $label): Role
     {
+        $code = strtoupper(trim($code));
+        $label = trim($label);
+        if ('' === $label) {
+            throw new \InvalidArgumentException('Role label cannot be empty.');
+        }
         $this->policy->assertMutable($code);
         $role = new Role($code, $label);
         $this->entityManager->persist($role);
@@ -30,6 +35,10 @@ final class RoleManager
         $this->policy->assertMutable($role->getCode());
         if ($role->isSystem()) {
             throw new \DomainException('System roles cannot be modified.');
+        }
+        $label = trim($label);
+        if ('' === $label) {
+            throw new \InvalidArgumentException('Role label cannot be empty.');
         }
         $role->rename($label);
         $this->entityManager->flush();
