@@ -1,0 +1,30 @@
+{
+    "manifests": {
+        "symsvel-framework/module-symsvel-module-roles": {
+            "manifest": {
+                "bundles": {
+                    "SymSvel\\Module\\SymsvelModuleRoles\\SymsvelModuleRolesBundle": [
+                        "all"
+                    ]
+                },
+                "copy-from-recipe": {
+                    "config/": "%CONFIG_DIR%/"
+                }
+            },
+            "files": {
+                "config/routes/symsvel-module-roles.yaml": {
+                    "contents": [
+                        "symsvel-module-roles:",
+                        "    resource:",
+                        "        path: '@SymsvelModuleRolesBundle/src/Controller/'",
+                        "        namespace: SymSvel\\Module\\SymsvelModuleRoles\\Controller",
+                        "    type: attribute",
+                        ""
+                    ],
+                    "executable": false
+                }
+            },
+            "ref": "REPLACE_WITH_RECIPE_COMMIT_SHA"
+        }
+    }
+}
