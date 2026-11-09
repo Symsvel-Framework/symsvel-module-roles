@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { moduleId } from '../src/lib/modules/symsvel-module-roles';
+import { moduleId } from '../src/lib/modules/roles';
 
-describe('symsvel-module-roles module', () => {
+describe('roles module', () => {
   it('exports its identifier', () => {
-    expect(moduleId).toBe('symsvel-module-roles');
+    expect(moduleId).toBe('roles');
   });
 });
