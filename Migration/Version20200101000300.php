@@ -12,7 +12,7 @@ final class Version20200101000300 extends AbstractMigration
 {
     public function up(Schema $schema): void
     {
-        $this->addSql("INSERT INTO symsvel_roles (code, label, system) VALUES ('ROLE_DEV', 'Développeur', TRUE), ('ROLE_SUPER_ADMIN', 'Super administrateur', TRUE), ('ROLE_ADMIN', 'Administrateur', TRUE), ('ROLE_USER', 'Utilisateur', TRUE)");
+        $this->addSql("INSERT INTO symsvel_roles (code, label, is_system) VALUES ('ROLE_DEV', 'Développeur', TRUE), ('ROLE_SUPER_ADMIN', 'Super administrateur', TRUE), ('ROLE_ADMIN', 'Administrateur', TRUE), ('ROLE_USER', 'Utilisateur', TRUE)");
     }
 
     public function down(Schema $schema): void
