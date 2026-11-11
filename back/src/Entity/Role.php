@@ -23,7 +23,7 @@ class Role
     #[ORM\Column(length: 150)]
     private string $label;
 
-    #[ORM\Column(options: ['default' => false])]
+    #[ORM\Column(name: 'is_system', options: ['default' => false])]
     private bool $system = false;
 
     public function __construct(string $code, string $label, bool $system = false)
