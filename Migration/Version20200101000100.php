@@ -16,7 +16,7 @@ final class Version20200101000100 extends AbstractMigration
         $table->addColumn('id', 'integer', ['autoincrement' => true]);
         $table->addColumn('code', 'string', ['length' => 100]);
         $table->addColumn('label', 'string', ['length' => 150]);
-        $table->addColumn('system', 'boolean', ['default' => false]);
+        $table->addColumn('is_system', 'boolean', ['default' => false]);
         $table->setPrimaryKey(['id']);
         $table->addUniqueIndex(['code'], 'uniq_symsvel_roles_code');
     }
