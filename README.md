@@ -13,3 +13,5 @@ Les sources immuables utilisent désormais des noms `Migration/VersionYYYYMMDDHH
 ## Compatibilité MySQL (11/11/2026)
 
 La colonne booléenne des rôles natifs est nommée `is_system` dans la migration de création et dans le seed initial. L'ancien identifiant `system` provoquait une erreur SQL 1064 sous MySQL 8.4 car il est réservé. Les versions et l'ordre des deux migrations restent inchangés. Les installations déjà migrées avec l'ancien schéma doivent être traitées séparément avant toute réexécution ; ne pas effacer manuellement un état de récupération de migration.
+
+Le mapping Doctrine ORM de `back/src/Entity/Role.php` conserve la propriété PHP `$system`, le constructeur et la méthode `isSystem()`, tout en ciblant explicitement la colonne SQL `is_system` avec `#[ORM\Column(name: 'is_system', ...)]`. Ainsi, les appels PHP existants ne changent pas.
