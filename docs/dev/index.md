@@ -21,3 +21,7 @@ La source `Migration/001_roles.php` définit désormais la structure de table av
 Les quatre rôles système (`ROLE_DEV`, `ROLE_SUPER_ADMIN`, `ROLE_ADMIN`, `ROLE_USER`) restent insérés au moyen de `addSql()`, à titre provisoire pour ne pas perdre les données initiales. Cette instruction peut échouer si la table n'a pas été créée.
 
 À vérifier sur un **XT réinitialisé**, sans aucune réparation locale : compilation, exécution, tables réellement présentes, index, rôles système, état du Setup et diagnostic/rollback en cas d'échec. Toute correction devra se faire dans le framework et être documentée avec tests et CI.
+
+### Visibilité des tests ignorés
+
+La CI affiche les raisons des tests PHPUnit ignorés avec `--display-skipped` (directement ou via le script Composer QA). Un test ignoré ne devient pas bloquant pour autant : les motifs sont examinés pour distinguer prérequis absents et couverture manquante.
