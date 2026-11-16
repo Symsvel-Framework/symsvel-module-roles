@@ -94,3 +94,11 @@ Composer existante : les opérations de gestion des rôles peuvent lire et
 modifier les permissions et ne doivent pas prétendre fonctionner sans le
 contrat ACLs. L'ordre du Tooling respecte cette dépendance sans réécrire
 les migrations initiales.
+
+
+### Limites de longueur des données Roles (16/11/2026)
+
+Les valeurs `code` et `label` sont validées en amont de Doctrine et dans
+l'entité conformément au schéma existant (100 et 150 octets). Une entrée
+trop longue est rejetée en HTTP 400, et non renvoyée à une erreur de
+troncature SQL pouvant varier selon les SGBD. Aucun changement de schéma.

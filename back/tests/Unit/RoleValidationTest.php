@@ -37,4 +37,16 @@ final class RoleValidationTest extends TestCase
         $this->expectException(\InvalidArgumentException::class);
         (new RoleManager($em))->rename(new Role('ROLE_EDITOR', 'Editor'), '  ');
     }
+
+    public function testRoleRejectsOversizedDatabaseFields(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        new \SymSvel\Module\Roles\Entity\Role('ROLE_'.str_repeat('A', 100), 'label');
+    }
+
+    public function testRoleRejectsOversizedLabelBeforePersistence(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        new \SymSvel\Module\Roles\Entity\Role('ROLE_EDITOR', str_repeat('X', 151));
+    }
 }

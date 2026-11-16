@@ -28,10 +28,13 @@ class Role
 
     public function __construct(string $code, string $label, bool $system = false)
     {
-        if (!preg_match('/^ROLE_[A-Z][A-Z0-9_]*$/D', $code)) {
+        if (strlen($code) > 100 || !preg_match('/^ROLE_[A-Z][A-Z0-9_]*$/D', $code)) {
             throw new \InvalidArgumentException('Invalid role code.');
         }
 
+        if (trim($label) === '' || strlen($label) > 150) {
+            throw new \InvalidArgumentException('Invalid role label.');
+        }
         $this->code = $code;
         $this->label = $label;
         $this->system = $system;
@@ -41,5 +44,10 @@ class Role
     public function getCode(): string { return $this->code; }
     public function getLabel(): string { return $this->label; }
     public function isSystem(): bool { return $this->system; }
-    public function rename(string $label): void { $this->label = $label; }
+    public function rename(string $label): void {
+        if (trim($label) === '' || strlen($label) > 150) {
+            throw new \InvalidArgumentException('Invalid role label.');
+        }
+        $this->label = trim($label);
+    }
 }
