@@ -25,3 +25,35 @@ Les quatre rôles système (`ROLE_DEV`, `ROLE_SUPER_ADMIN`, `ROLE_ADMIN`, `ROLE_
 ### Visibilité des tests ignorés
 
 La CI affiche les raisons des tests PHPUnit ignorés avec `--display-skipped` (directement ou via le script Composer QA). Un test ignoré ne devient pas bloquant pour autant : les motifs sont examinés pour distinguer prérequis absents et couverture manquante.
+
+
+## Administration BO des rôles (16/11/2026)
+
+La précédente route `GET /apibo/roles` était protégée par un attribut
+Symfony `IsGranted('ROLE_ADMIN')` sans contrat BO explicite. Elle est
+remplacée par le **BoAccessGate** partagé, qui valide d'abord le jeton BO,
+puis le droit `roles:list`. Les endpoints ajoutés sont :
+
+- `GET /apibo/roles` : rôles réels de `symsvel_roles`, avec affectations
+  explicites `permissions` (codes `resource.action`).
+- `POST /apibo/roles` : créer un rôle `ROLE_*` non natif, avec libellé et
+  liste optionnelle de permissions, dans une transaction DBAL/ORM.
+- `PATCH /apibo/roles/{id}` : modifier le libellé et/ou les permissions.
+- `DELETE /apibo/roles/{id}` : supprimer seulement un rôle non natif,
+  **non utilisé par un administrateur**, en nettoyant ses droits et les
+  permissions dynamiques `roles.assign:ROLE_*` associées.
+
+Les mutations suivent les ACL `roles:create/update/delete`. Les affectations
+de droits exigent aussi `acls:manage` **technique** : le super-admin
+fonctionnel n'en bénéficie pas implicitement. Le formulaire Roles conserve
+l'UX XCore de sélection des permissions, sans échapper à ces contrôles.
+
+Les codes système `ROLE_DEV`, `ROLE_SUPER_ADMIN`, `ROLE_ADMIN` et
+`ROLE_USER` restent protégés par `RolePolicy` et `RoleManager`.
+Le provider `RolePermissionProvider` déclare les actions CRUD et expose
+l'affectation des rôles **effectivement persistés** à travers les droits
+`roles.assign:ROLE_*`. Seuls les rôles BO (hors DEV et USER) sont
+assignables. Le contrôle de l'attribution finale reste côté Admins.
+
+Les migrations initiales et le contrat d'entité Role ne changent pas.
+Le crash-test XT et la CI assemblée BO restent nécessaires.
