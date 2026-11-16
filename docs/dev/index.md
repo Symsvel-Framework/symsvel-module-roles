@@ -57,3 +57,13 @@ assignables. Le contrôle de l'attribution finale reste côté Admins.
 
 Les migrations initiales et le contrat d'entité Role ne changent pas.
 Le crash-test XT et la CI assemblée BO restent nécessaires.
+
+
+### QA BO assemblée (16/11/2026)
+
+La CI possède un job indépendant `bo-integration`, qui importe les
+routes Svelte et les fichiers du module dans le BO hôte `dev` selon
+la structure de synchronisation Tooling. Les validations TypeScript,
+Svelte, Prettier, ESLint, build statique et Vitest s'exécutent sur
+l'assemblage, pas uniquement sur un fichier isolé. Le crash-test XT
+reste nécessaire pour les API, les ACL et la navigation réelle.
