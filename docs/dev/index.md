@@ -76,3 +76,12 @@ que l'écran ACLs. Un acteur non développeur ne peut pas réécrire les droits
 de son propre rôle, même s'il possède explicitement `acls.manage`.
 La vérification se fait après résolution du rôle en base et avant toute
 mutation. Le backend garde l'autorité sur ce contrôle.
+
+
+### Test d'intégration CRUD/ACL (16/11/2026)
+
+`RoleAdministrationHttpTest` utilise SQLite en mémoire et un vrai
+EntityManager : création d'un rôle avec ACL, mise à jour et remplacement
+des droits, refus de suppression d'un rôle affecté, protection des rôles
+natifs et rollback de création si une permission inconnue est fournie.
+Le scénario HTTP complet dans XT est encore nécessaire.
