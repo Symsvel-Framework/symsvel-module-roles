@@ -67,3 +67,12 @@ la structure de synchronisation Tooling. Les validations TypeScript,
 Svelte, Prettier, ESLint, build statique et Vitest s'exécutent sur
 l'assemblage, pas uniquement sur un fichier isolé. Le crash-test XT
 reste nécessaire pour les API, les ACL et la navigation réelle.
+
+
+### Interdiction d'auto-attribution (16/11/2026)
+
+L'édition des permissions depuis Roles applique les mêmes contrôles techniques
+que l'écran ACLs. Un acteur non développeur ne peut pas réécrire les droits
+de son propre rôle, même s'il possède explicitement `acls.manage`.
+La vérification se fait après résolution du rôle en base et avant toute
+mutation. Le backend garde l'autorité sur ce contrôle.

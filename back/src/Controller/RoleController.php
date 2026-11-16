@@ -81,9 +81,11 @@ final readonly class RoleController
                 (!is_array($data['permissions']) || !array_is_list($data['permissions'])))) {
             return self::failure(400);
         }
-        if (array_key_exists('permissions', $data) && !$this->canGrant($request)) return self::failure(403);
         $role = $id > 0 ? $this->roles->find($id) : null;
         if (!$role instanceof Role) return self::failure(404);
+        if (array_key_exists('permissions', $data) && !$this->canGrant($request, $role->getCode())) {
+            return self::failure(403);
+        }
         try {
             $this->db->transactional(function () use ($data, $role): void {
                 if (array_key_exists('label', $data)) $this->manager->rename($role, $data['label']);
@@ -127,10 +129,11 @@ final readonly class RoleController
         return $decision->allowed() ? null : self::failure($decision->status);
     }
 
-    private function canGrant(Request $request): bool
+    private function canGrant(Request $request, ?string $targetCode = null): bool
     {
         $decision = $this->gate->check($request, 'acls', 'manage');
         return $decision->allowed()
+            && ($targetCode === null || $targetCode !== $decision->roleCode || $targetCode === 'ROLE_DEV')
             && $this->acls->allows((string) $decision->roleCode, 'acls', 'manage', true);
     }
 
