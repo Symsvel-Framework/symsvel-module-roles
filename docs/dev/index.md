@@ -85,3 +85,12 @@ EntityManager : création d'un rôle avec ACL, mise à jour et remplacement
 des droits, refus de suppression d'un rôle affecté, protection des rôles
 natifs et rollback de création si une permission inconnue est fournie.
 Le scénario HTTP complet dans XT est encore nécessaire.
+
+
+### Dépendance déclarative envers ACLs (16/11/2026)
+
+Le manifeste de Roles déclare `acls: '*'` en complément de la dépendance
+Composer existante : les opérations de gestion des rôles peuvent lire et
+modifier les permissions et ne doivent pas prétendre fonctionner sans le
+contrat ACLs. L'ordre du Tooling respecte cette dépendance sans réécrire
+les migrations initiales.
