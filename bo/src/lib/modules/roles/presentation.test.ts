@@ -10,6 +10,7 @@ describe('BO Roles', () => {
   it('localizes role management', () => {
     expect(roleCopy('fr').create).toBe('Nouveau rôle');
     expect(roleCopy('en').delete).toBe('Delete');
+    expect(roleCopy('es-MX').create).toBe('Nouveau rôle');
   });
   it('rejects native, malformed or reserved role codes', () => {
     expect(validNewRoleCode('ROLE_EDITOR')).toBe(true);
