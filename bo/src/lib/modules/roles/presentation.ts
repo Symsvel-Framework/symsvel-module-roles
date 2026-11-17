@@ -71,5 +71,5 @@ const copy = {
 
 export type RoleCopy = typeof copy.fr;
 export function roleCopy(language: string | null): RoleCopy {
-  return language?.toLowerCase().startsWith('fr') ? copy.fr : copy.en;
+  return language?.toLowerCase().split('-')[0] === 'en' ? copy.en : copy.fr;
 }
