@@ -1,3 +1,5 @@
+import { generatedTranslation } from '../../i18n/generated-translations';
+
 export type BoRole = {
   id: number;
   code: string;
@@ -71,5 +73,8 @@ const copy = {
 
 export type RoleCopy = typeof copy.fr;
 export function roleCopy(language: string | null): RoleCopy {
-  return language?.toLowerCase().split('-')[0] === 'en' ? copy.en : copy.fr;
+  const base = language?.toLowerCase().split('-')[0] === 'en' ? copy.en : copy.fr;
+  return Object.fromEntries(Object.entries(base).map(([key, value]) => [
+    key, generatedTranslation(language, 'bo.roles.' + key) ?? value
+  ])) as RoleCopy;
 }

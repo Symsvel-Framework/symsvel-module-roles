@@ -108,3 +108,8 @@ troncature SQL pouvant varier selon les SGBD. Aucun changement de schéma.
 Les libellés intégrés de l'interface sont sélectionnés à partir de la langue d'interface (code ISO du navigateur ou du compte). Lorsque la locale n'a pas de dictionnaire intégré, les libellés français sont utilisés ; l'anglais reste disponible explicitement pour `en`. Le fallback ne modifie ni la langue ISO du site ni celle du compte et n'impose pas l'existence de traductions avant l'installation. Le repli doit être réalisé à la clé lors de l'introduction des dictionnaires dynamiques ; l'éditeur BO des traductions et le chargement fichier/BDD ne sont pas fournis par cette seule correction.
 
 Vérifications : tests de sélection FR/EN/autres locales et tests de build/CI. La validation finale nécessite les crash-tests locaux sur le parcours Setup, BO et App.
+
+
+## Traductions BO par module (18/11/2026)
+
+`bo/src/lib/translations/<lang>.ts` livre les libellés du module Roles. Tooling les installe sous `bo/src/lib/translations/roles/<lang>.ts`, puis les enregistre dans Languages avec la convention `bo.roles.<clé>`. Le module conserve ses clés ; le BO conserve les personnalisations publiées. CI et crash-tests XT restent nécessaires.
