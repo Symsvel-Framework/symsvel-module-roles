@@ -22,3 +22,10 @@ du rôle. CT XT et validation de l'assemblage BO restent nécessaires.
 ### Normalisation Design System BO (19/11/2026)
 
 Le catalogue des rôles conserve ses modales `Modal`, tableaux `DataTable` et pagination native BO, ses règles ACL et ses appels API asynchrones. Les surfaces, bordures, textes secondaires, champ de code, cases de permission et focus utilisent désormais les jetons sémantiques `--bo-*` communs au BO HP. L'interface fonctionne en mode clair ou sombre sans palette locale parallèle. Aucun changement métier ni navigation forcée, tests/CI et CT XT requis.
+
+### Boutons sémantiques BO (19/11/2026)
+
+Suppression rouge, enregistrement de rôle vert. Les rôles natifs et droits restent protégés.
+Les variantes sémantiques sont fournies par Button et DataTable dans
+le Design System BO. Le bouton désactivé demeure gris et lisible.
+Contrôle visuel clair/sombre et CI requis.

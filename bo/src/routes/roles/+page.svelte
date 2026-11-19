@@ -64,7 +64,7 @@
       onClick: (row) => open(row)
     },
     {
-      key: 'delete', label: t.delete,
+      key: 'delete', variant: 'danger', label: t.delete,
       disabled: (row) => row.native || deleting !== null,
       onClick: (row) => { void remove(row); }
     }
@@ -223,7 +223,7 @@
       {/if}
       <div class="role-actions">
         <Button type="button" variant="secondary" onclick={() => showForm = false}>{t.cancel}</Button>
-        <Button type="submit" disabled={saving}>{saving ? t.saving : t.save}</Button>
+        <Button type="submit" variant="success" disabled={saving}>{saving ? t.saving : t.save}</Button>
       </div>
     </form>
   </Modal>
