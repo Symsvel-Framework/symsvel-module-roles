@@ -233,17 +233,19 @@
   .roles-page { max-width: 1200px; margin: auto; display: grid; gap: 20px; }
   .page-heading, .section-heading { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
   .page-heading h1, h2 { margin: 0; }
-  .page-heading p, small { color: #667085; }
-  .panel { padding: 24px; background: white; border: 1px solid #e2e7ee; border-radius: 14px; min-width: 0; }
+  .page-heading p, small { color: var(--bo-muted); }
+  .panel { padding: 24px; background: var(--bo-surface); color: var(--bo-text); border: 1px solid var(--bo-border); border-radius: 14px; min-width: 0; }
   .section-heading { margin-bottom: 16px; }
   .role-form { display: grid; gap: 10px; }
   .role-form > label { font-weight: 650; }
-  .role-form > input { padding: 11px; border: 1px solid #ccd4df; border-radius: 8px; font: inherit; }
-  fieldset { border: 1px solid #e2e7ee; border-radius: 10px; max-height: 350px; overflow: auto; margin-top: 14px; }
+  .role-form > input { padding: 11px; border: 1px solid var(--bo-border); border-radius: 8px; font: inherit; background: var(--bo-input); color: var(--bo-text); min-width: 0; }
+  .role-form > input:focus-visible { outline: 2px solid var(--bo-focus); outline-offset: 2px; }
+  fieldset { border: 1px solid var(--bo-border); border-radius: 10px; max-height: 350px; overflow: auto; margin-top: 14px; }
   legend { font-weight: 700; }
   .permission-group { display: grid; gap: 8px; margin: 12px 0; }
   .permission-choice { display: flex; align-items: flex-start; gap: 8px; font-size: .9rem; }
-  .permission-choice input { margin-top: 4px; }
+  .permission-choice input { margin-top: 4px; accent-color: var(--bo-primary); }
   .permission-choice small { display: block; margin-top: 4px; font-size: .72rem; }
+  .roles-page { color: var(--bo-text); }
   .role-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 16px; }
 </style>

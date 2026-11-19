@@ -18,3 +18,7 @@ apparaissent dans un fieldset organisé par module. L'édition de droits exige
 fonctionnel `roles:update`. Une erreur de droit ne doit pas être masquée.
 Les changements de permissions sont transactionnels avec la création/édition
 du rôle. CT XT et validation de l'assemblage BO restent nécessaires.
+
+### Normalisation Design System BO (19/11/2026)
+
+Le catalogue des rôles conserve ses modales `Modal`, tableaux `DataTable` et pagination native BO, ses règles ACL et ses appels API asynchrones. Les surfaces, bordures, textes secondaires, champ de code, cases de permission et focus utilisent désormais les jetons sémantiques `--bo-*` communs au BO HP. L'interface fonctionne en mode clair ou sombre sans palette locale parallèle. Aucun changement métier ni navigation forcée, tests/CI et CT XT requis.
