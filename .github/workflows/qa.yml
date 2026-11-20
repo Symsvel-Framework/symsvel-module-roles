@@ -9,5 +9,55 @@ jobs:
         run: |
           php -v
           php -r 'if (PHP_VERSION_ID < 80400 || PHP_VERSION_ID >= 80500) { exit(1); }'
-      - run: composer install --no-interaction --prefer-dist
+      - name: Install private Acls development contract
+        env:
+          SYMSVEL_READ_TOKEN: ${{ secrets.SYMSVEL_READ_TOKEN }}
+        run: |
+          if [ -z "$SYMSVEL_READ_TOKEN" ]; then echo "::error::SYMSVEL_READ_TOKEN missing"; exit 1; fi
+          export COMPOSER_AUTH="$(php -r 'echo json_encode(["github-oauth" => ["github.com" => getenv("SYMSVEL_READ_TOKEN")]], JSON_THROW_ON_ERROR);')"
+          composer install --no-interaction --prefer-dist --no-progress
       - run: composer qa
+
+
+  bo-integration:
+    runs-on: [self-hosted, linux, ARM64, symsvel]
+    steps:
+      - name: Checkout roles module
+        uses: actions/checkout@v4
+      - name: Checkout BO host on dev
+        uses: actions/checkout@v4
+        with:
+          repository: Symsvel-Framework/symsvel-bo
+          ref: dev
+          path: assembled-bo
+          token: ${{ secrets.SYMSVEL_READ_TOKEN }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: assembled-bo/package-lock.json
+      - name: Assemble roles routes like Tooling
+        run: |
+          mkdir -p assembled-bo/src/lib/modules/roles/routes/roles
+          mkdir -p assembled-bo/src/routes/roles
+          cp bo/src/lib/modules/roles/*.ts assembled-bo/src/lib/modules/roles/
+          cp bo/src/routes/roles/+page.svelte assembled-bo/src/lib/modules/roles/routes/roles/+page.svelte
+          cat > assembled-bo/src/routes/roles/+page.svelte <<'ROUTE'
+          <script lang="ts">
+            import ModulePage from '#lib/modules/roles/routes/roles/+page.svelte';
+          </script>
+          <ModulePage />
+          ROUTE
+      - name: Install BO dependencies
+        working-directory: assembled-bo
+        run: npm ci --no-audit --no-fund
+      - name: Format assembled BO (same convention as BO CI)
+        working-directory: assembled-bo
+        run: npm run format
+      - name: Validate assembled BO types, style, build and tests
+        working-directory: assembled-bo
+        run: |
+          npm run check
+          npm run lint
+          npm run build
+          npm run test:unit -- --run

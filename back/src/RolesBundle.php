@@ -11,6 +11,7 @@ use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
 use SymSvel\Module\Roles\Controller\RolesPingController;
 use SymSvel\Module\Roles\Controller\RoleController;
 use SymSvel\Module\Roles\Repository\RoleRepository;
+use SymSvel\Module\Roles\Permission\RolePermissionProvider;
 
 final class RolesBundle extends AbstractBundle
 {
@@ -28,6 +29,8 @@ final class RolesBundle extends AbstractBundle
         $builder->register(RoleManager::class, RoleManager::class)
             ->setAutowired(true)
             ->setArgument('$policy', new Reference(RolePolicy::class));
+        $builder->register(RolePermissionProvider::class, RolePermissionProvider::class)
+            ->setAutowired(true)->addTag('symsvel.acls.permission_provider');
     }
 
     public function prependExtension(ContainerConfigurator $container, ContainerBuilder $builder): void

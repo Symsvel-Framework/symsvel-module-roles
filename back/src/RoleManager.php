@@ -19,8 +19,11 @@ final class RoleManager
     {
         $code = strtoupper(trim($code));
         $label = trim($label);
-        if ('' === $label) {
+        if ('' === $label || strlen($label) > 150) {
             throw new \InvalidArgumentException('Role label cannot be empty.');
+        }
+        if (strlen($code) > 100) {
+            throw new \InvalidArgumentException('Role code exceeds maximum length.');
         }
         $this->policy->assertMutable($code);
         $role = new Role($code, $label);
