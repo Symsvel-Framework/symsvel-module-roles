@@ -8,9 +8,12 @@
 
 Module natif de gestion des **rôles** du Back Office et de leur relation avec les permissions. Il dépend d'ACLs et possède la table `symsvel_roles`.
 
-## CI (10/11/2026)
+## Intégration continue GitHub-hosted (22/11/2026)
 
-`.github/workflows/qa.yml` exécute Composer et les tests du module sur le runner Docker ARM64 d'organisation (`self-hosted`, `linux`, `ARM64`, `symsvel`), avec PHP 8.4 préinstallé. La CI GitHub-hosted originale est conservée et désactivée dans `.github/workflows/qa.yml.stub`. Pour revenir aux runners GitHub, restaurer ce `.stub` sous le nom `qa.yml`. Les jobs locaux nécessitent que le Mac et Docker soient disponibles ; runner réservé aux contributions de confiance. Validation finale soumise à une CI verte.
+Les workflows de ce dépôt public s'exécutent sur **GitHub-hosted Ubuntu 24.04**, avec les dépendances installées dans chaque job (plus de runner Docker local). Le workflow actif est `.github/workflows/qa.yml`. Les jobs PHP 8.4 et d'intégration BO SvelteKit/Node.js 24 restent actifs, avec installation de Chromium et de ses dépendances Ubuntu.
+
+Les runners auto-hébergés du mainteneur restent réservés à `symsvel-packages` et `symsvel-recipes` (privés). Les CI et les crash-tests locaux sont des validations distinctes.
+
 
 ## Migrations natives (chantier DBAL)
 
