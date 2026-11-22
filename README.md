@@ -15,3 +15,11 @@ Les sources immuables utilisent désormais des noms `Migration/VersionYYYYMMDDHH
 La colonne booléenne des rôles natifs est nommée `is_system` dans la migration de création et dans le seed initial. L'ancien identifiant `system` provoquait une erreur SQL 1064 sous MySQL 8.4 car il est réservé. Les versions et l'ordre des deux migrations restent inchangés. Les installations déjà migrées avec l'ancien schéma doivent être traitées séparément avant toute réexécution ; ne pas effacer manuellement un état de récupération de migration.
 
 Le mapping Doctrine ORM de `back/src/Entity/Role.php` conserve la propriété PHP `$system`, le constructeur et la méthode `isSystem()`, tout en ciblant explicitement la colonne SQL `is_system` avec `#[ORM\Column(name: 'is_system', ...)]`. Ainsi, les appels PHP existants ne changent pas.
+
+## Licence MIT et contributions
+
+Ce dépôt est distribué sous [licence MIT](LICENSE). Le code peut être utilisé, modifié et redistribué, y compris dans des projets commerciaux ou propriétaires, dans les conditions de cette licence (notamment la conservation de la notice de copyright et de licence).
+
+**Contribuer :** créer un fork, puis proposer une pull request vers `dev` lorsque cette branche existe, sinon vers la branche par défaut. Expliquer la modification et fournir les tests et la documentation concernés. Les mainteneurs conservent la maîtrise des revues, des validations (CI et crash-tests), de l'intégration et des releases officielles. Une PR ne garantit pas son acceptation.
+
+**Versions officielles :** seules les versions diffusées par l'organisation [Symsvel-Framework](https://github.com/Symsvel-Framework) sont officielles. Les forks sont libres sous MIT, mais ne doivent pas être présentés comme officiellement approuvés par les mainteneurs. Cette distinction n'ajoute aucune restriction aux droits accordés par la licence MIT sur le code.
