@@ -113,3 +113,7 @@ Vérifications : tests de sélection FR/EN/autres locales et tests de build/CI. 
 ## Traductions BO par module (18/11/2026)
 
 `bo/src/lib/translations/<lang>.ts` livre les libellés du module Roles. Tooling les installe sous `bo/src/lib/translations/roles/<lang>.ts`, puis les enregistre dans Languages avec la convention `bo.roles.<clé>`. Le module conserve ses clés ; le BO conserve les personnalisations publiées. CI et crash-tests XT restent nécessaires.
+
+## Branding et sécurité
+
+Les écrans du module lisent le nom public via `getProjectBrand()` du BO et affichent `$brandName`. Le layout effectue la requête ; le module ne crée ni état ni requête indépendante. L'intégration est vérifiée par la QA ; le CT doit vérifier les titres avec un nom de projet personnalisé. La QA PHP exécute également `composer audit --locked` après installation, sans exclusion d'avis.
