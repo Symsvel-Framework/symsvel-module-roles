@@ -22,6 +22,7 @@ jobs:
           if [ -z "$SYMSVEL_READ_TOKEN" ]; then echo "::error::SYMSVEL_READ_TOKEN missing"; exit 1; fi
           export COMPOSER_AUTH="$(php -r 'echo json_encode(["github-oauth" => ["github.com" => getenv("SYMSVEL_READ_TOKEN")]], JSON_THROW_ON_ERROR);')"
           composer install --no-interaction --prefer-dist --no-progress
+          composer audit --locked
       - run: composer qa
 
 
