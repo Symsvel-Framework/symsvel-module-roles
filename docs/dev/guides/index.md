@@ -20,3 +20,8 @@ Il n'y a pas de fichier à éditer pour gérer les rôles. Les règles d'attribu
 ## API BO
 
 GET /apibo/roles liste les rôles ; POST crée un rôle, PATCH /apibo/roles/{id} le modifie, DELETE le supprime si autorisé. Utilisez [ACLs](../acls/index.md) pour vérifier les permissions d'une opération métier.
+
+
+### Scopes natifs
+
+Back et BO uniquement. Les interfaces d’administration sont exclusivement dans le BO. Les anciennes routes de test App/Front ne sont plus distribuées.

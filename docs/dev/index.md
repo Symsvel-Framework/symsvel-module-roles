@@ -1,16 +1,10 @@
 # Roles
 
-## Fixtures temporaires du crash-test d'intégration
+## Scopes et routes natives (26/11/2026)
 
-Ce module déclare les scopes `back`, `bo`, `app` et `front` pour le crash-test global `symsvel create-project --components=all --dev`.
+Back et BO uniquement. Les interfaces d’administration sont exclusivement dans le BO.
 
-- Symfony : `GET /api/roles/ping` doit retourner `{"module":"roles","status":"ok"}` sans données métier ni authentification propre au controller.
-- SvelteKit : chaque interface fournit `src/routes/roles/+page.svelte`, affichant `Page roles`. Le synchroniseur copie la source sous `src/lib/modules/roles/routes/` et crée le relais `src/routes/roles/+page.svelte`.
-- Le code métier et ses contrôles d'accès existants restent inchangés.
-
-Ces pages et endpoints sont des sondes d'intégration, pas des interfaces métier définitives. **Limitation provisoire :** les trois scopes Svelte sont déclarés obligatoires par le manifeste ; cette fixture vise uniquement une installation avec tous les composants, pas les installations partielles.
-
-Validation requise : tests automatisés, CI verte, puis crash-test XT (endpoints HTTP et affichage réel des pages BO/App/Front). La présence des fichiers seule ne suffit pas.
+Les anciennes pages de sondage `Page roles` dans App et Front ont été retirées. Tooling retire automatiquement leurs relais et sources générés à la prochaine synchronisation, si leurs empreintes sont intactes. Les endpoints PHP de ping et les contrôles métier restent inchangés.
 
 ## Expérimentation migrations Schema (10/11/2026)
 
